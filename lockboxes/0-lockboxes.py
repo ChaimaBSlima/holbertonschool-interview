@@ -22,7 +22,25 @@ def canUnlockAll(boxes):
     """
 
     n = len(boxes)
+    box_closed = [False] * n
+    box_closed[0] = True
     keys = []
+    i = 0
+    while i < n:
+        print(i)
+        for j in range(len(boxes[i])):
+            if boxes[i][j] not in keys:
+                keys.append(boxes[i][j])
+        print (keys)
+        if i > 0 and i in keys:
+            for k in keys:
+                if k < n:
+                    box_closed[k] = True
+            print("closed box   ",box_closed )
+        i += 1
+    return (not(False in box_closed))
+                
+"""    keys = []
     used_keys = []
     i = 0
     test = True
@@ -51,3 +69,4 @@ def canUnlockAll(boxes):
 
         i += 1
     return test
+"""
