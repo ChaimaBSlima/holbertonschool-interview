@@ -30,22 +30,24 @@ def canUnlockAll(boxes):
         for j in range(len(boxes[i])):
             if boxes[i][j] not in keys:
                 keys.append(boxes[i][j])
-        # print("\n",i)
+        #print("\n",i)
         # print(keys)
         if i >= 1:
-            if i not in used_keys:
-                for k in keys:
-                    # print(k, end=",")
-                    if k > i+1:
-                        # print("\n K>i :",i+1,"<",k)
-                        if k not in used_keys:
-                            for k1 in range(len(boxes[k])):
-                                if boxes[k][k1] not in keys:
-                                    keys.append(boxes[k][k1])
-                        if k not in used_keys:
-                            used_keys.append(k)
-            # print("Used keys are  ", used_keys)
             if i not in keys:
                 test = False
+            else:
+                if i not in used_keys:
+                    for k in keys:
+                        # print(k, end=",")
+                        if k > i+1:
+                            # print("\n K>i :",i+1,"<",k)
+                            if k not in used_keys:
+                                for k1 in range(len(boxes[k])):
+                                    if boxes[k][k1] not in keys:
+                                        keys.append(boxes[k][k1])
+                            if k not in used_keys:
+                                used_keys.append(k)
+            # print("Used keys are  ", used_keys)
+
         i += 1
     return test
