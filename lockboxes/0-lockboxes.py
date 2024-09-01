@@ -26,8 +26,7 @@ def canUnlockAll(boxes):
     box_closed[0] = True
     keys = boxes[0]
     for key in keys:
-        if key < n and not box_closed[key]: 
+        if key < n and not box_closed[key]:
             box_closed[key] = True
             keys.extend(boxes[key])
-    return (not(False in box_closed))
-
+    return (not (False in box_closed))
