@@ -43,7 +43,7 @@ def signal_handler(sig, frame):
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
-
+    global total_size, line_count
     try:
         for line in sys.stdin:
             # Split the line into parts to extract necessary fields
