@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Task 0: 0. Log parsing """
 import sys
 import signal
 
