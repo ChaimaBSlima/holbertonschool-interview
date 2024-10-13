@@ -47,17 +47,6 @@ signal.signal(signal.SIGINT, signal_handler)
 # Main loop to read stdin
 try:
     for line in sys.stdin:
-        """
-        Main loop that reads input from stdin line by line.
-
-        For each line, it checks if the line matches the expected format:
-
-<IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
-
-        If the line matches, it extracts the status code and file size
-        and updates the respective statistics. Every 10 lines,
-        the statistics are printed.
-        """
         parts = line.split()
         if len(parts) < 7:
             continue  # Skip line if it doesn't have the correct format
@@ -83,11 +72,6 @@ try:
             continue  # Skip line if there are parsing issues
 
 except KeyboardInterrupt:
-    """
-    Catch the KeyboardInterrupt exception when the user presses CTRL + C.
-    When this happens, the statistics are printed one final time before
-    the program exits.
-    """
     # Handle keyboard interrupt, print final statistics
     print_stats()
     sys.exit(0)
