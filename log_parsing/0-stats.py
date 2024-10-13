@@ -4,6 +4,7 @@ import sys
 import signal
 
 # Initialize global variables
+global total_size, line_count
 total_size = 0
 status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 valid_codes = set(status_codes.keys())
@@ -43,7 +44,6 @@ def signal_handler(sig, frame):
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
-    global total_size, line_count
     try:
         for line in sys.stdin:
             # Split the line into parts to extract necessary fields
