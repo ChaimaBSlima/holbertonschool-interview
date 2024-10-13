@@ -40,31 +40,40 @@ def signal_handler(sig, frame):
     print_stats()
     sys.exit(0)
 
+
 if __name__ == "__main__":
-    # Register signal handler for CTRL + C
     signal.signal(signal.SIGINT, signal_handler)
 
-    for line in sys.stdin:
-        # Split the line into parts to extract necessary fields
-        parts = line.split()
+    try:
+        for line in sys.stdin:
+            # Split the line into parts to extract necessary fields
+            parts = line.split()
+            if len(parts) < 7:
+                continue  # Skip line if it doesn't have the correct format
 
-        # Check if the input format matches the expected number of parts
-        if len(parts) < 7:
-            continue  # Skip line if it doesn't have the correct format
-        
-        # Check if status code and file size are valid integers
-        if parts[-2].isdigit() and parts[-1].isdigit():
-            status_code = int(parts[-2])
-            file_size = int(parts[-1])
+            try:
+                # Extract file size and status code
+                file_size = int(parts[-1])
+                status_code = int(parts[-2])
 
-            # Update total file size and status code counts
-            total_size += file_size
+                # Update total file size and status code counts
+                total_size += file_size
 
-            if status_code in valid_codes:
-                status_codes[status_code] += 1
-            
-            line_count += 1
+                if status_code in valid_codes:
+                    status_codes[status_code] += 1
 
-            # Print stats every 10 lines
-            if line_count % 10 == 0:
-                print_stats()
+                line_count += 1
+
+                # Print stats every 10 lines
+                if line_count % 10 == 0:
+                    print_stats()
+
+            except (ValueError, IndexError):
+                # Skip the line if there are parsing issues
+                # (invalid file size/status code)
+                continue
+
+    except KeyboardInterrupt:
+        # Print stats one final time on keyboard interruption
+        print_stats()
+        sys.exit(0)
