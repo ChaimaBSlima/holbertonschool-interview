@@ -4,7 +4,6 @@ import sys
 import signal
 
 # Initialize global variables
-global total_size, line_count
 total_size = 0
 status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 valid_codes = set(status_codes.keys())
@@ -70,8 +69,10 @@ if __name__ == "__main__":
 
             except (ValueError, IndexError):
                 # Skip the line if there are parsing issues
-                # (invalid file size/status code)
                 continue
+
+        # Print stats at the end of the input, even if it's less than 10 lines
+        print_stats()
 
     except KeyboardInterrupt:
         # Print stats one final time on keyboard interruption
