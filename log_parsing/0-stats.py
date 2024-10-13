@@ -40,40 +40,31 @@ def signal_handler(sig, frame):
     print_stats()
     sys.exit(0)
 
+if __name__ == "__main__":
+    # Register signal handler for CTRL + C
+    signal.signal(signal.SIGINT, signal_handler)
 
-# Register signal handler for CTRL + C
-signal.signal(signal.SIGINT, signal_handler)
-
-"""
-# Main loop to read stdin
-try:
     for line in sys.stdin:
+        # Split the line into parts to extract necessary fields
         parts = line.split()
+
+        # Check if the input format matches the expected number of parts
         if len(parts) < 7:
             continue  # Skip line if it doesn't have the correct format
-        try:
-            # Extract relevant data from the line
-            file_size = int(parts[-1])
+        
+        # Check if status code and file size are valid integers
+        if parts[-2].isdigit() and parts[-1].isdigit():
             status_code = int(parts[-2])
+            file_size = int(parts[-1])
 
-            # Update file size
+            # Update total file size and status code counts
             total_size += file_size
 
-            # Update status code count if valid
             if status_code in valid_codes:
                 status_codes[status_code] += 1
-
+            
             line_count += 1
 
-            # Print statistics every 10 lines
+            # Print stats every 10 lines
             if line_count % 10 == 0:
                 print_stats()
-
-        except (ValueError, IndexError):
-            continue  # Skip line if there are parsing issues
-
-except KeyboardInterrupt:
-    # Handle keyboard interrupt, print final statistics
-    print_stats()
-    sys.exit(0)
-"""
