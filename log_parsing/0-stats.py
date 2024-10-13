@@ -44,6 +44,7 @@ def signal_handler(sig, frame):
 # Register signal handler for CTRL + C
 signal.signal(signal.SIGINT, signal_handler)
 
+"""
 # Main loop to read stdin
 try:
     for line in sys.stdin:
@@ -75,3 +76,4 @@ except KeyboardInterrupt:
     # Handle keyboard interrupt, print final statistics
     print_stats()
     sys.exit(0)
+"""
