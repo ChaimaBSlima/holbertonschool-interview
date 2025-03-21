@@ -1,12 +1,12 @@
 #include "slide_line.h"
 
 /**
-* slide_left - Slides and merges the array to the left
-* @line: Pointer to the array of integers
-* @size: Number of elements in the array
-*
-* Return: 1 on success, 0 on failure
-*/
+ * slide_left - Slides and merges the array to the left
+ * @line: Pointer to the array of integers
+ * @size: Number of elements in the array
+ *
+ * Return: 1 on success, 0 on failure
+ */
 static int slide_left(int *line, size_t size)
 {
 	size_t i, j = 0;
@@ -15,13 +15,13 @@ static int slide_left(int *line, size_t size)
 	{
 		if (line[i] != 0)
 		{
-			line[j] = line[i];
+			if (i != j)
+				line[j] = line[i];
 			if (i != j)
 				line[i] = 0;
 			j++;
 		}
 	}
-
 	for (i = 0; i < j - 1; i++)
 	{
 		if (line[i] == line[i + 1])
@@ -31,7 +31,6 @@ static int slide_left(int *line, size_t size)
 			i++;
 		}
 	}
-
 	j = 0;
 	for (i = 0; i < size; i++)
 	{
@@ -48,17 +47,17 @@ static int slide_left(int *line, size_t size)
 }
 
 /**
-* slide_right - Slides and merges the array to the right
-* @line: Pointer to the array of integers
-* @size: Number of elements in the array
-*
-* Return: 1 on success, 0 on failure
+  * slide_right - Slides and merges the array to the right
+  * @line: Pointer to the array of integers
+  * @size: Number of elements in the array
+  *
+  * Return: 1 on success, 0 on failure
 */
 static int slide_right(int *line, size_t size)
 {
-	size_t i, j = size - 1;
+	 size_t i, j = size - 1;
 
-	for (i = size - 1; i < size; i--)
+	for (i = size - 1; i != (size_t)-1; i--)
 	{
 		if (line[i] != 0)
 		{
@@ -73,14 +72,14 @@ static int slide_right(int *line, size_t size)
 	{
 		if (line[i] == line[i - 1])
 		{
-			line[i] *= 2;
-			line[i - 1] = 0;
-			i--;
+			 line[i] *= 2;
+			 line[i - 1] = 0;
+			 i--;
 		}
 	}
 
 	j = size - 1;
-	for (i = size - 1; i < size; i--)
+	for (i = size - 1; i != (size_t)-1; i--)
 	{
 		if (line[i] != 0)
 		{
