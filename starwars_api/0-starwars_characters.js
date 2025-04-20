@@ -51,4 +51,4 @@ https.get(apiUrl, (response) => {
   });
 }).on('error', (error) => {
   console.error(error);
-}); 
+});
