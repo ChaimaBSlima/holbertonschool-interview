@@ -3,6 +3,7 @@
 Rain
 """
 
+
 def rain(walls):
     """
     Calculate the amount of rainwater retained after it rains.
